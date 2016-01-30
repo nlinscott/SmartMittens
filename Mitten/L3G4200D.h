@@ -1,0 +1,38 @@
+/*
+ *  L3G4200D.h
+ *  Gyroscope library
+ *
+ *  Created by Samwell Freeman on 10/05/14.
+ *  Copyright 2014 LucidTronix.
+ *
+ */
+
+#ifndef L3G4200D_h
+#define L3G4200D_h
+
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
+#include "WProgram.h"
+#endif
+
+#include <Wire.h>
+#include "ISensor.h"
+
+class L3G4200D: public ISensor{
+  public:
+    L3G4200D();
+    void read();
+    void initialize(int scale);
+    int getX();
+    int getY();
+    int getZ();
+  private:
+    int X, Y, Z;
+    void writeRegister(int deviceAddress, byte address, byte val);
+    int readRegister(int deviceAddress, byte address);  
+    int L3G4200D_Address;
+};
+
+#endif
+
