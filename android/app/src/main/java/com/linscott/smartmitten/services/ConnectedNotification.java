@@ -8,9 +8,6 @@ import android.net.Uri;
 
 import com.linscott.smartmitten.R;
 
-/**
- * Created by Nic on 1/24/2016.
- */
 public class ConnectedNotification {
 
     private Context context;

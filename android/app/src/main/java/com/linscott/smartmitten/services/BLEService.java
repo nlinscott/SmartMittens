@@ -46,9 +46,11 @@ public class BLEService extends Service {
 
     public static final String GESTURE_ACTION = "gesture_action";
 
-    public static final String ACTION_UP = "up";
+    public static final String EXTRA_GESTURE = "gesture";
 
-    public static final String ACTION_DOWN = "down";
+    public static final String EXTRA_GESTURE_UP = "up";
+
+    public static final String EXTRA_GESTURE_DOWN = "down";
 
     private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
 

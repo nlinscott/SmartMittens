@@ -24,9 +24,7 @@ import com.linscott.smartmitten.tools.Debug;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Nic on 12/8/2015.
- */
+
 @TargetApi(23)
 public class MarshmallowBleScannerFragment extends BLEScannerFragment {
 

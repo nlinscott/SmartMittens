@@ -1,8 +1,5 @@
 package com.linscott.smartmitten.adapter;
 
-/**
- * Created by Nic on 8/28/2014.
- */
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;

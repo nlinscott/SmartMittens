@@ -25,12 +25,6 @@ import com.linscott.smartmitten.tools.Debug;
 import java.util.List;
 
 
-/**
- * Created by Nic on 7/8/2015.
- *
- * Abstract adapter between Android 4.3 - 4.4  and 5.0
- *
- */
 public abstract class BLEScannerFragment extends Fragment {
 
     protected BluetoothManager bluetoothManager;
