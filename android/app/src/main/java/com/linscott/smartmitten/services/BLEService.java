@@ -94,7 +94,16 @@ public class BLEService extends Service {
             String s = new String(data, Charset.forName("UTF-8"));
             //get a number
 
-            Debug.Log(s);
+           // Debug.Log(s);
+
+            Intent intent = new Intent();
+            intent.setAction(GESTURE_ACTION);
+
+            intent.putExtra(EXTRA_GESTURE, s);
+
+            sendBroadcast(intent);
+
+
 
         }
     };

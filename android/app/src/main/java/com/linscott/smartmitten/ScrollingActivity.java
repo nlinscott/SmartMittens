@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.linscott.smartmitten.services.BLEService;
+import com.linscott.smartmitten.tools.Debug;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -75,20 +76,40 @@ public class ScrollingActivity extends AppCompatActivity {
 
         list.setAdapter(adapter);
 
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateListPosition(11);
             }
-        },4000);
+        },4000);*/
     }
 
     private void updateListPosition(final int number){
-
+        Debug.Log("Current position is: " + currentPosition);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                list.smoothScrollToPosition(currentPosition += number);
+                int temp = currentPosition + number;
+                Debug.Log("Trying to move to: " +temp);
+                if (temp <= list.getAdapter().getCount() && temp >= 0) {
+                    currentPosition = temp;
+                    Debug.Log("moving list to: " + currentPosition);
+                    list.smoothScrollToPosition(currentPosition);
+                }else{
+
+                    if(temp >= list.getAdapter().getCount()){
+                        Debug.Log("moving to last item");
+                        currentPosition = list.getAdapter().getCount();
+                        list.smoothScrollToPosition(currentPosition);
+                    }else if( temp <= 0){
+                        Debug.Log("reset to 0");
+                        currentPosition = 0;
+                        list.smoothScrollToPosition(currentPosition);
+                    }else {
+                        Debug.Log("remaining at: " + currentPosition);
+                    }
+                }
+
             }
         });
 
@@ -109,14 +130,14 @@ public class ScrollingActivity extends AppCompatActivity {
     private final BroadcastReceiver gestureReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.hasExtra(BLEService.GESTURE_ACTION)){
+            if(intent.getAction().equals(BLEService.GESTURE_ACTION)){
                 if(intent.hasExtra(BLEService.EXTRA_GESTURE)){
-                    String extra = intent.getStringExtra(BLEService.EXTRA_GESTURE);
-
-                    if(extra.equals(BLEService.EXTRA_GESTURE_UP)){
-                        updateListPosition(11);
-                    }else if(extra.equals(BLEService.EXTRA_GESTURE_DOWN)){
-                        updateListPosition(-11);
+                    String direction = intent.getStringExtra(BLEService.EXTRA_GESTURE);
+                    Debug.Log(direction);
+                    if(direction.equals(BLEService.EXTRA_GESTURE_UP)){
+                        updateListPosition(10);
+                    }else if(direction.equals(BLEService.EXTRA_GESTURE_DOWN)){
+                        updateListPosition(-10);
                     }
                 }
             }

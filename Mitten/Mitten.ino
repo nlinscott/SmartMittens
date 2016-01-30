@@ -85,31 +85,28 @@ void loop() {
     
     if(accel->getZ() >= v){
       Serial.print("swipe up");
-      delay(1000);
+       uint8_t buffer[3] = "up";
+       sendData(buffer);
+      delay(1200);
     }
   }else if(gyro->getY() >= downYthresh){
     
     if(accel->getZ() >= v){
-      Serial.print("swipe down");
-      delay(1000);
+       Serial.print("swipe down");
+       uint8_t buffer[5] = "down";
+       sendData(buffer);
+      delay(1200);
     }
   }
   
   Serial.println();
-  Serial.println();
-
- /*
- uint8_t sendBuffer[20]="lolXD";
- uint8_t length=5; 
- 
- boolean result = uart_tx(sendBuffer, length);
- 
- if(result){
-   Serial.println("sent data");
- }
- 
- delay(1000);
- */
- 
+  
 }
+
+void sendData(uint8_t* sendBuffer){
+  uint8_t length = strlen((char*)sendBuffer);
+  uart_tx(sendBuffer, length);
+}
+
+
 
